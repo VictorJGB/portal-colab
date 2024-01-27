@@ -1,7 +1,7 @@
 'use client'
 
 
-import LinkCard from '../components/link-card/index';
+import LinkCard from '../../components/link-card/index';
 
 import collaboratorLinks from '@/configs/link-cards';
 

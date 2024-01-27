@@ -20,7 +20,7 @@ const logOut = () => {
 
 const Header = () => {
   return (
-    <header className='w-full h-20 p-6 shadow-xl flex items-center justify-center'>
+    <header className='sticky z-10 top-0 w-full bg-background h-20 p-6 shadow-xl flex items-center justify-center'>
         <div className='w-32'>
             <Image 
             className='w-full'  
@@ -31,7 +31,7 @@ const Header = () => {
         <div className='ms-auto h-full gap-4 flex items-center justify-center'>
           <HeaderNavigation />
           <Separator orientation='vertical' className='w-[2px] h-full bg-primary'/>
-          <Button onClick={logOut} variant={'ghost'} className='hover:bg-transparent hover:text-primary'>
+          <Button onClick={() => logOut} variant={'ghost'} className='hover:bg-transparent hover:text-primary'>
             <LogOut />
           </Button>
         </div>
