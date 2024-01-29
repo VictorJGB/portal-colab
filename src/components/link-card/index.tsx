@@ -1,6 +1,6 @@
 import LinkCardsProps from '@/types/link-card'
 import classNames from 'classnames'
-import {  ExternalLink, LucideIcon } from 'lucide-react'
+import {  ExternalLink } from 'lucide-react'
 
 import Link from 'next/link'
 
@@ -8,9 +8,13 @@ import React from 'react'
 
 type componentProps = {
     variant?: 'default' | 'primary' | 'secondary'
+    width?: string
+    height?: string
 }
 
-const LinkCard = ({icon: Icon, title, description, linkPath, variant = 'default'}: LinkCardsProps & componentProps) => {
+const LinkCard = ({
+    icon: Icon, title, description, linkPath, variant = 'default'
+}: LinkCardsProps & componentProps) => {
   return (
     <Link
         href={linkPath}
