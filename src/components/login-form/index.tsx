@@ -11,25 +11,20 @@ import { useForm } from 'react-hook-form'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { LogIn } from 'lucide-react'
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
-
+import { Form, FormControl, FormField, FormItem, FormMessage } from '../ui/form'
 
 const formSchema = z.object({
   username: z.string().min(2, 
     {
-      message: 'Usuário deve ter no mínimo 2 caracteres'
-    }).max(50),
-  password: z.string().min(1, {
-    message: 'Senha deve ter no mínimo 1 caractere'
-  })
+      message: 'CPF Inválido'
+    }),
 })
 
 const LoginForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
-      password: ""
+      username: ""
     },
   })
 
@@ -42,31 +37,17 @@ const LoginForm = () => {
       <form 
         onSubmit={form.handleSubmit(onSubmit)} 
         className='flex flex-col items-center justify-center gap-3 w-1/2'>
-        {/* username */}
+        {/* password */}
         <FormField
           control={form.control}
           name='username'
           render={({field}) => (
             <FormItem className='w-full'>
-              <FormLabel className='text-white'>Usuário</FormLabel>
               <FormControl>
-                <Input placeholder='Ex: teste' {...field}/>
+                
+                <Input  {...field} placeholder='CPF'/>
               </FormControl>
-              <FormMessage className='text-xs'/>
-            </FormItem>
-          )}
-        />
-        {/* password */}
-        <FormField
-          control={form.control}
-          name='password'
-          render={({field}) => (
-            <FormItem className='w-full'>
-              <FormLabel className='text-white'>Senha</FormLabel>
-              <FormControl>
-                <Input placeholder='********' {...field}/>
-              </FormControl>
-              <FormMessage className='text-xs' />
+              <FormMessage className='px-3 text-xs' />
             </FormItem>
           )}
         />
