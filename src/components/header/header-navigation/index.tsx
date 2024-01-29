@@ -17,7 +17,7 @@ import Link from 'next/link'
 
 const HeaderNavigation = () => {
   return (
-    <NavigationMenu>
+    <NavigationMenu className='hidden lg:flex'>
         <NavigationMenuList>
             {/* Percorrendo array de links */}
             {collaboratorLinks.map((link) => {    
