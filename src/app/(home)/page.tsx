@@ -10,7 +10,7 @@ export default function Home() {
     <div className="flex w-full min-h-screen flex-col items-center justify-center">
 
       {/* Utils section */}
-      <section className='h-[200vh] lg:h-screen w-full flex flex-col items-center justify-around'>
+      <section className='h-[200vh] md:h-[120vh] xl:h-screen w-full flex flex-col items-center justify-around'>
         <div className='flex flex-col gap-2 items-center justify-center'>
           <h1 className='text-primary text-2xl font-bold'>Portal do Colaborador</h1>
           <h2 className='text-secondary text-lg font-semibold'>Tudo o que você precisa em um só lugar</h2>
