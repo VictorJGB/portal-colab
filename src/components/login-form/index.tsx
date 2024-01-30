@@ -19,6 +19,7 @@ import { Button } from '../ui/button'
 import { Loader2, LogIn } from 'lucide-react'
 
 import { Form, FormControl, FormField, FormItem, FormMessage } from '../ui/form'
+import { useSessionStorage } from '@/hooks/use-session-storage'
 
 const formSchema = z.object({
   cpf: z.string().min(2, 
@@ -31,11 +32,13 @@ const LoginForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const {replace} = useRouter()
   const {data} = useCollab();
+  const {setItem} = useSessionStorage('isLogged')
 
   function Login () {
     setIsLoading(true)
     setTimeout(() => {
       setIsLoading(false)
+      setItem(true)
       replace('/')
     }, 2000)
   }
@@ -54,6 +57,7 @@ const LoginForm = () => {
       const collab = data.find((user) => user.ljzkv === values.cpf)
 
       if(collab){
+        values.cpf === ''
         Login()
       }
       else {
