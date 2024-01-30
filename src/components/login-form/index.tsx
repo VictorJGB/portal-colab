@@ -1,6 +1,12 @@
 'use client'
 
-import React from 'react'
+import React, {useState} from 'react'
+
+import useCollab from '@/hooks/use-collab'
+
+import callToast from '@/utils/call-toast'
+
+import { useRouter } from 'next/navigation'
 
 // form
 import {z} from "zod"
@@ -10,26 +16,55 @@ import { useForm } from 'react-hook-form'
 // components
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
-import { LogIn } from 'lucide-react'
+import { Loader2, LogIn } from 'lucide-react'
+
 import { Form, FormControl, FormField, FormItem, FormMessage } from '../ui/form'
 
 const formSchema = z.object({
-  username: z.string().min(2, 
+  cpf: z.string().min(2, 
     {
       message: 'CPF Inválido'
     }),
 })
 
 const LoginForm = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const {replace} = useRouter()
+  const {data} = useCollab();
+
+  function Login () {
+    setIsLoading(true)
+    setTimeout(() => {
+      setIsLoading(false)
+      replace('/')
+    }, 2000)
+  }
+
+  // Preparando formulário
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: ""
+      cpf: ""
     },
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+
+    if(data){
+      const collab = data.find((user) => user.ljzkv === values.cpf)
+
+      if(collab){
+        Login()
+      }
+      else {
+        callToast(
+          'Erro',
+          'CPF não reconhecido',
+          true
+        )
+      }
+    }
+
   }
 
   return (
@@ -40,7 +75,7 @@ const LoginForm = () => {
         {/* password */}
         <FormField
           control={form.control}
-          name='username'
+          name='cpf'
           render={({field}) => (
             <FormItem className='w-full'>
               <FormControl>
@@ -51,8 +86,9 @@ const LoginForm = () => {
             </FormItem>
           )}
         />
-        <Button className='w-full' type='submit'>
-          <LogIn className='mr-2 w-4 h-4'/> Acessar
+        <Button className='w-full' disabled={isLoading} type='submit'>
+          {isLoading && <Loader2  className="mr-2 h-4 w-4 animate-spin" />}
+          {!isLoading && <LogIn className='mr-2 w-4 h-4'/>} Acessar
         </Button>
       </form>
     </Form>

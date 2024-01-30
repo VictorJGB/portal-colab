@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import Header from "@/components/header";
 
 export default function AuthLayout({
@@ -6,11 +7,12 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <body className='h-screen w-full'>
+    <div className='h-screen w-full'>
       <Header />
       <main className="flex w-full min-h-screen flex-col items-center justify-center">
         {children}
       </main>
-  </body>
+      <Footer />
+  </div>
   );
 }

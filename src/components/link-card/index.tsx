@@ -20,7 +20,7 @@ const LinkCard = ({
         href={linkPath}
         target='blank'
         className={classNames(
-            'w-[400px] h-40 p-6 flex flex-col items-center justify-center gap-2 shadow-md transition-all duration-300 rounded-xl hover:scale-105',
+            'w-4/5 sm:w-96 h-40 p-6 flex flex-col items-center justify-center gap-2 shadow-md transition-all duration-300 rounded-xl hover:scale-105',
             {
                 'bg-background text-primary' : variant === 'default'
             },

@@ -1,14 +1,19 @@
-import useSWR from 'swr'
+import { useEffect, useState } from 'react'
+
+import Collaborators from '@/types/collaborators'
 
 import { axiosInstance } from '@/configs/axios-base-config'
 
-const fetcher = (url: string) => axiosInstance({
-  method: 'GET',
-  url: url,
-}).then((res) => res.data)
-
 export default function useCollab(){
-  const {data, isLoading, error} = useSWR('https://dummyjson.com/products/1', fetcher)
+  const [data, setData] = useState<Collaborators[] | null>(null)
 
-  return { data, isLoading, error}
+  useEffect(() => {
+    axiosInstance({
+      method: 'GET',
+    }).then((res) => {
+      setData(res.data)
+    })
+  })
+
+  return { data }
 }

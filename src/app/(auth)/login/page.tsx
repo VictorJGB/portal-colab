@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 
 import Logo from '@/assets/image/logo.png'
@@ -6,6 +8,7 @@ import Image from 'next/image'
 import LoginForm from '@/components/login-form'
 
 const Login = () => {
+
   return (
     <div className='h-screen w-full flex items-center justify-center'>
       {/* first part */}

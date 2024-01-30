@@ -36,6 +36,7 @@ const Header = () => {
             className='hidden lg:flex hover:bg-transparent hover:text-primary'>
               <Link
                 href={'/login'}
+                
               >
                 <LogOut />
               </Link>
