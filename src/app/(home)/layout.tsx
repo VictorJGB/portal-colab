@@ -4,6 +4,7 @@ import { useLayoutEffect, useState } from "react";
 
 import Footer from "@/components/footer";
 import Header from "@/components/header";
+import FullPageLoader from "@/components/full-page-loader";
 
 import { useSessionStorage } from "@/hooks/use-session-storage";
 import { useRouter } from "next/navigation";
@@ -27,7 +28,7 @@ export default function HomeLayout({
   })
 
   if(isLoading) {
-    return <div>Carregando...</div>
+    return <FullPageLoader />
   }
 
   if(!isLoading){

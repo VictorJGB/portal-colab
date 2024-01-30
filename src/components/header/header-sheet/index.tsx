@@ -1,8 +1,9 @@
+import Link  from 'next/link';
+
 import { Button } from "@/components/ui/button"
 
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetFooter,
   SheetHeader,
@@ -17,17 +18,17 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 
+import { useSessionStorage } from "@/hooks/use-session-storage"
 
 import { ExternalLink, LogOut, Menu } from "lucide-react"
 
 import collaboratorLinks from "@/configs/link-cards"
-import Link  from 'next/link';
-
-
 
 import { Separator } from "@/components/ui/separator";
 
 const HeaderSheet = () => {
+  const {removeItem} = useSessionStorage('isLogged')
+
   return (
     <Sheet>
       <SheetTrigger asChild className="flex lg:hidden">
@@ -64,6 +65,7 @@ const HeaderSheet = () => {
           <div className="flex w-full items-start">
             <Button 
               asChild
+              onClick={() => removeItem()}
               variant={'secondary'}
             >
               <Link href={'/login'}>
