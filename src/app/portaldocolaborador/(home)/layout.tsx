@@ -2,7 +2,6 @@
 
 import { useLayoutEffect, useState } from "react";
 
-import Footer from "@/components/footer";
 import Header from "@/components/header";
 import FullPageLoader from "@/components/full-page-loader";
 
@@ -17,14 +16,16 @@ export default function HomeLayout({
 }) {
   const [isLoading, SetIsLoading] = useState<boolean>(true)
   const {getItem} = useSessionStorage('isLogged')
-  const {replace} = useRouter()
+  const {push} = useRouter()
 
   useLayoutEffect(() => {
     if(!getItem()){
-      SetIsLoading(false)
-      replace('/login')
+      push('/portaldocolaborador/login')
     }
-    SetIsLoading(false)
+    
+    setTimeout(() => {
+      SetIsLoading(false)
+    }, 2000)
   })
 
   if(isLoading) {

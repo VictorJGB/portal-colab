@@ -1,5 +1,7 @@
 type Collaborators = {
-  ljzkv: string
+  nome: string,
+  cargo: string,
+  cpf: string
 }
 
 export default Collaborators

@@ -68,7 +68,7 @@ const HeaderSheet = () => {
               onClick={() => removeItem()}
               variant={'secondary'}
             >
-              <Link href={'/login'}>
+              <Link href={'/portaldocolaborador/login'}>
                 <LogOut className="w-4 h-4 mr-4"/>
                 <span>Logout</span>
               </Link>

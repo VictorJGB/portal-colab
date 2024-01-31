@@ -1,10 +1,10 @@
 'use client'
 
-import LinkCard from '../../components/link-card/index';
+import LinkCard from '../../../components/link-card/index';
 
 import collaboratorLinks from '@/configs/link-cards';
 
-export default function Home() {
+export default function PortalColaborador() {
 
   return (
     <div className="flex w-full min-h-screen flex-col items-center justify-center">

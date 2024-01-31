@@ -4,6 +4,7 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 
 import {Toaster} from '@/components/ui/toaster'
+import { CollabContextProvider } from "@/context/collaborator";
 
 const roboto = Roboto({ 
   weight: ['300', '400', '700'],
@@ -23,7 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.className}>
-          {children}
+          <CollabContextProvider>
+            {children}
+          </CollabContextProvider>
           <Toaster />
       </body>
     </html>

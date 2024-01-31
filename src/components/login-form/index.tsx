@@ -8,14 +8,17 @@ import callToast from '@/utils/call-toast'
 
 import { useRouter } from 'next/navigation'
 
+import { useCollabContext } from '@/context/collaborator'
+
 // form
 import {z} from "zod"
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
 // components
-import { Input } from '../ui/input'
 import { Button } from '../ui/button'
+import InputMask from 'react-input-mask'
+
 import { Loader2, LogIn } from 'lucide-react'
 
 import { Form, FormControl, FormField, FormItem, FormMessage } from '../ui/form'
@@ -30,6 +33,7 @@ const formSchema = z.object({
 
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const { setCollab } = useCollabContext();
   const {replace} = useRouter()
   const {data} = useCollab();
   const {setItem} = useSessionStorage('isLogged')
@@ -39,25 +43,34 @@ const LoginForm = () => {
     setTimeout(() => {
       setIsLoading(false)
       setItem(true)
-      replace('/')
-    }, 2000)
+      replace('/portaldocolaborador')
+    }, 3000)
   }
 
   // Preparando formulário
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      cpf: ""
-    },
+      cpf: ''
+    }
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-
     if(data){
-      const collab = data.find((user) => user.ljzkv === values.cpf)
+      const user = data.find((user) => user.cpf === values.cpf)
 
-      if(collab){
-        values.cpf === ''
+      if(user){
+        // Setando dados do colaborador no contexto
+        setCollab({
+           nome: user.nome,
+           cargo: user.cargo,
+           cpf: user.cpf
+        })
+
+        // resetando informações do formulário
+        form.reset()
+
+        // Realizando a função de login
         Login()
       }
       else {
@@ -68,7 +81,6 @@ const LoginForm = () => {
         )
       }
     }
-
   }
 
   return (
@@ -76,15 +88,18 @@ const LoginForm = () => {
       <form 
         onSubmit={form.handleSubmit(onSubmit)} 
         className='flex flex-col items-center justify-center gap-3 w-1/2'>
-        {/* password */}
+        {/* cpf */}
         <FormField
           control={form.control}
           name='cpf'
           render={({field}) => (
             <FormItem className='w-full'>
               <FormControl>
-                
-                <Input  {...field} placeholder='CPF'/>
+                <InputMask 
+                  className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-black focus:ring-black' 
+                  {...field}
+                  mask={'999.999.999-99'}
+                  placeholder='CPF'/>
               </FormControl>
               <FormMessage className='px-3 text-xs' />
             </FormItem>
@@ -92,7 +107,7 @@ const LoginForm = () => {
         />
         <Button className='w-full text-primary hover:bg-secondary hover:text-white border-0' 
           variant={'outline'}
-        disabled={isLoading} type='submit'>
+          disabled={isLoading || !form.formState.isValid} type='submit'>
           {isLoading && <Loader2  className="mr-2 h-4 w-4 animate-spin" />}
           {!isLoading && <LogIn className='mr-2 w-4 h-4'/>} Acessar
         </Button>
