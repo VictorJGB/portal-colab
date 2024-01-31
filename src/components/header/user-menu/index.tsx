@@ -31,16 +31,16 @@ const UserMenu = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger className='hidden lg:flex'>
         <Avatar>
           <AvatarImage src="https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.png" alt="usuário" />
           <AvatarFallback>FV</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent className='w-44'>
         <DropdownMenuLabel className='flex flex-col items-start'>
-          <span className='text-sm font-semibold capitalize'>{user}</span>
-          <span className='text-xs font-medium capitalize'>{collab?.cargo.toLowerCase()}</span>
+          <span className='text-base font-semibold capitalize'>{user}</span>
+          <span className='text-sm font-medium capitalize'>{collab?.cargo.toLowerCase()}</span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
