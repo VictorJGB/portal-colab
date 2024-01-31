@@ -2,6 +2,8 @@
 
 import React from 'react'
 
+import Link from 'next/link'
+
 import Image from 'next/image'
 
 import Logo from '@/assets/image/logo.png'
@@ -13,12 +15,17 @@ import { Separator } from '@/components/ui/separator'
 
 import HeaderNavigation from './header-navigation'
 import HeaderSheet from './header-sheet'
-import Link from 'next/link'
+import UserMenu from './user-menu'
+
 import { useSessionStorage } from '@/hooks/use-session-storage'
+import { useCollabContext } from '@/context/collaborator'
 
 
 const Header = () => {
   const {removeItem} = useSessionStorage('isLogged')
+  const {collab} = useCollabContext()
+
+  const user = collab?.nome.split(' ')[0]
 
   return (
     <header className='sticky z-10 top-0 w-full bg-background h-20 p-6 shadow-md flex items-center justify-center'>
@@ -33,6 +40,7 @@ const Header = () => {
         <div className='ms-auto h-full gap-4 flex items-center justify-center'>
           <HeaderNavigation />
           <Separator orientation='vertical' className='w-[2px] h-full hidden lg:flex bg-primary'/>
+          {/* {collab && <span className='hidden lg:flex'>Bem vindo(a), <b className='text-primary'>{user}</b></span>}
           <Button 
             asChild
             variant={'ghost'}
@@ -44,7 +52,8 @@ const Header = () => {
               >
                 <LogOut />
               </Link>
-          </Button>
+          </Button> */}
+          <UserMenu />
         </div>
     </header>
   )

@@ -25,9 +25,14 @@ import { ExternalLink, LogOut, Menu } from "lucide-react"
 import collaboratorLinks from "@/configs/link-cards"
 
 import { Separator } from "@/components/ui/separator";
+import { useCollabContext } from '@/context/collaborator';
 
 const HeaderSheet = () => {
   const {removeItem} = useSessionStorage('isLogged')
+
+  const {collab} = useCollabContext()
+
+  const user = collab?.nome.split(' ')[0]
 
   return (
     <Sheet>
@@ -37,8 +42,11 @@ const HeaderSheet = () => {
         </Button>
       </SheetTrigger>
       <SheetContent className="px-2 overflow-auto">
-        <SheetHeader className="px-2">
-          <SheetTitle>Links</SheetTitle>
+        <SheetHeader className="px-2 py-1 mt-3">
+          <SheetTitle className='flex justify-between'>
+            Links
+            <span className='text-base font-medium'>bem vindo(a), <b className='text-primary'>{user}</b></span>
+          </SheetTitle>
         </SheetHeader>
         <Separator />
         <div className="grid gap-4 p-4">
