@@ -24,9 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.className}>
-          <CollabContextProvider>
             {children}
-          </CollabContextProvider>
           <Toaster />
       </body>
     </html>

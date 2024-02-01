@@ -3,10 +3,12 @@
 import { useLayoutEffect, useState } from "react";
 
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 import FullPageLoader from "@/components/full-page-loader";
 
 import { useSessionStorage } from "@/hooks/use-session-storage";
 import { useRouter } from "next/navigation";
+import { CollabContextProvider, useCollabContext } from "@/context/collaborator";
 
 
 export default function HomeLayout({
@@ -15,11 +17,12 @@ export default function HomeLayout({
   children: React.ReactNode;
 }) {
   const [isLoading, SetIsLoading] = useState<boolean>(true)
+  const {collab} = useCollabContext()
   const {getItem} = useSessionStorage('isLogged')
   const {push} = useRouter()
 
   useLayoutEffect(() => {
-    if(!getItem()){
+    if(!getItem() && !collab){
       push('/portaldocolaborador/login')
     }
     
@@ -35,11 +38,13 @@ export default function HomeLayout({
   if(!isLoading){
     return (
       <div className='h-screen w-full'>
-        <Header />
-        <main className="flex w-full min-h-screen flex-col items-center justify-center">
-        {children}
-      </main>
-      {/* <Footer /> */}
+        <CollabContextProvider>
+          <Header />
+          <main className="flex w-full min-h-screen flex-col items-center justify-center">
+            {children}
+          </main>
+          <Footer />
+      </CollabContextProvider>
       </div>
     )
   }

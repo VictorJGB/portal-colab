@@ -18,9 +18,6 @@ const config = {
       },
     },
     extend: {
-      backgroundImage: {
-        crematorio: "",
-      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

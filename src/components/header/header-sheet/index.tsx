@@ -52,11 +52,11 @@ const HeaderSheet = () => {
         <div className="grid gap-4 p-4">
           <Accordion type="single" collapsible className="w-full">
             {collaboratorLinks.map((data,index) => {
-              return <AccordionItem value={`index-${index}`}>
+              return <AccordionItem key={index} value={`index-${index}`}>
               <AccordionTrigger className="text-primary font-semibold">{data.name}</AccordionTrigger>
               <AccordionContent className="flex flex-col items-start">
-                {data.infos.map((link) => {
-                  return <Button variant={'ghost'} asChild>
+                {data.infos.map((link, index) => {
+                  return <Button key={index} variant={'ghost'} asChild>
                    <Link href={link.linkPath} target="blank">
                     <ExternalLink className="mr-4 w-4 h-4"/> 
                     <span className="text-zinc-500">{link.title}</span>

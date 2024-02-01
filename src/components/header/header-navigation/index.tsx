@@ -20,16 +20,16 @@ const HeaderNavigation = () => {
     <NavigationMenu className='hidden lg:flex'>
         <NavigationMenuList>
             {/* Percorrendo array de links */}
-            {collaboratorLinks.map((link) => {    
-                return (<NavigationMenuItem>
+            {collaboratorLinks.map((link, index) => {    
+                return (<NavigationMenuItem key={index}>
                     <NavigationMenuTrigger className='bg-primary text-white'>
                         {link.name}
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
                         <ul className='grid w-[300px] gap-3 p-4'>
                             {/* Percorrendo array de infos */}
-                            {link.infos.map((info) => {
-                                return <Link href={info.linkPath} target='blank' legacyBehavior passHref>
+                            {link.infos.map((info, index) => {
+                                return <Link key={index} href={info.linkPath} target='blank' legacyBehavior passHref>
                                     <NavigationMenuLink className='p-4 flex items-start justify-between rounded-lg hover:bg-secondary hover:text-white transition-all'>
                                         {info.title}
                                         <ExternalLink size='16'/>

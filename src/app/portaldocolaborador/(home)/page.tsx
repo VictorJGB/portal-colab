@@ -35,7 +35,7 @@ export default function PortalColaborador() {
       </section>
 
       {/* Training section */}
-      <section className='h-screen bg-primary w-full flex flex-col gap-10 lg:gap-20 items-center justify-center'>
+      <section className='h-[60vh] xl:h-screen bg-primary w-full flex flex-col gap-10 lg:gap-20 items-center justify-center'>
         <h2 className='text-white text-lg font-semibold'>Links de Treinamento</h2>
         <div className='flex w-full gap-6 flex-wrap items-center justify-center'>
           {/* Card link */}
@@ -53,12 +53,14 @@ export default function PortalColaborador() {
       </section>
 
       {/* Department section */}
-      <section className='h-[200vh] lg:h-screen w-full flex flex-col gap-10 items-center justify-center'>
+      <section className='h-[120vh] sm:h-screen w-full flex flex-col gap-10 items-center justify-center'>
         <h2 className='text-zinc-600 text-lg font-semibold'>Links de Setores</h2>
         <div className='flex w-full gap-6 flex-wrap items-center justify-center'>
           {/* Card link */}
           {collaboratorLinks[2].infos.map((link, index) => {
-            return <LinkCard 
+            return <LinkCard
+              className='w-4/5 sm:w-80 h-28'
+              iconAlign='center'
               key={index}
               variant='secondary'
               title={link.title} 

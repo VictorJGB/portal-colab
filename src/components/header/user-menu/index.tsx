@@ -32,8 +32,8 @@ const UserMenu = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className='hidden lg:flex'>
-        <Avatar>
-          <AvatarImage src="https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.png" alt="usuário" />
+        <Avatar className='border border-zinc-600'>
+          <AvatarImage src="https://media.licdn.com/dms/image/C4E03AQF-Ir1phXmPcQ/profile-displayphoto-shrink_800_800/0/1655721804643?e=2147483647&v=beta&t=0pZVUJY5M8iN7IGKY9hob9sdhEB-_UYQvYbbVfPcMm8" alt="usuário" />
           <AvatarFallback>FV</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>

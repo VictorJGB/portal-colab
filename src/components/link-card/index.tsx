@@ -1,26 +1,41 @@
 import LinkCardsProps from '@/types/link-card'
+
 import classNames from 'classnames'
+
 import {  ExternalLink } from 'lucide-react'
 
 import Link from 'next/link'
 
-import React from 'react'
+import React, { AnchorHTMLAttributes, forwardRef } from 'react'
 
-type componentProps = {
+import { Button } from '../ui/button'
+
+type componentProps = LinkCardsProps & AnchorHTMLAttributes<HTMLAnchorElement> & {
     variant?: 'default' | 'primary' | 'secondary'
-    width?: string
-    height?: string
+    iconAlign?: 'top' | 'center'
 }
 
-const LinkCard = ({
-    icon: Icon, title, description, linkPath, variant = 'default'
-}: LinkCardsProps & componentProps) => {
+const LinkCard = forwardRef<HTMLAnchorElement, componentProps>(
+    ({
+        className, 
+        iconAlign = 'top',
+        icon: Icon,
+        title,
+        description,
+        linkPath,
+        variant = 'default',
+        ...props
+    }, ref) => {
   return (
     <Link
         href={linkPath}
         target='blank'
         className={classNames(
-            'w-4/5 sm:w-96 h-40 p-6 flex flex-col items-center justify-center gap-2 shadow-md transition-all duration-300 rounded-xl hover:scale-105',
+            'p-6 flex flex-col items-center justify-center gap-2 shadow-md transition-all duration-300 rounded-xl hover:scale-105',
+            className,
+            {
+                'w-4/5 sm:w-96 h-40': className === undefined
+            },
             {
                 'bg-background text-primary' : variant === 'default'
             },
@@ -30,12 +45,17 @@ const LinkCard = ({
             {
                 'bg-secondary text-white' : variant === 'secondary'
             },
-
         )}
+        ref={ref}
+        {...props}
     >
         {/* icon wrapper */}
         <div className='w-full flex items-center justify-end'>
-            <ExternalLink className={variant === 'default' ? 'text-primary' : 'text-white'} size={24}/>
+            {iconAlign === 'top' &&  <ExternalLink 
+                className={variant === 'default' ? 'text-primary' : 'text-white'} 
+                size={24}
+                />
+            }
         </div>
 
         {/* card info */}
@@ -48,9 +68,16 @@ const LinkCard = ({
                 <h1 className='text-xl font-bold'>{title}</h1>
                 <p className=' text-base font-medium'>{description}</p>
             </div>
+            {iconAlign === 'center' && <ExternalLink 
+                className={variant === 'default' ? 'text-primary' : 'text-white'} 
+                size={24}
+            /> }
         </div>
     </Link>
   )
 }
+)
+
+LinkCard.displayName = 'LinkCard'
 
 export default LinkCard

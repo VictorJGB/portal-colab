@@ -1,6 +1,6 @@
 'use client'
 
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 
 import useCollab from '@/hooks/use-collab'
 
@@ -37,6 +37,7 @@ const LoginForm = () => {
   const {replace} = useRouter()
   const {data} = useCollab();
   const {setItem} = useSessionStorage('isLogged')
+
 
   function Login () {
     setIsLoading(true)
@@ -107,7 +108,7 @@ const LoginForm = () => {
         />
         <Button className='w-full text-primary hover:bg-secondary hover:text-white border-0' 
           variant={'outline'}
-          disabled={isLoading || !form.formState.isValid} type='submit'>
+          disabled={isLoading} type='submit'>
           {isLoading && <Loader2  className="mr-2 h-4 w-4 animate-spin" />}
           {!isLoading && <LogIn className='mr-2 w-4 h-4'/>} Acessar
         </Button>
